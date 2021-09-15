@@ -36,7 +36,7 @@
         <button mat-mini-fab color="primary" [routerLink]="['/categorias/atualizarcategoria', categoria.categoriaId]">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-mini-fab color="warn">
+        <button mat-mini-fab color="warn" (click)="AbrirDialog(categoria.categoriaId, categoria.nome)">
           <mat-icon>delete_forever</mat-icon>
         </button>
       </td>
