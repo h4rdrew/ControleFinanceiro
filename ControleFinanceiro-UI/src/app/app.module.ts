@@ -10,14 +10,18 @@ import { CategoriasService } from './services/categorias.service';
 import { ListagemCategoriasComponent } from './components/Categoria/listagem-categorias/listagem-categorias.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { NovaCategoriaComponent } from './components/Categoria/nova-categoria/nova-categoria.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AtualizarCategoriaComponent } from './components/Categoria/atualizar-categoria/atualizar-categoria.component';
 
 @NgModule({
-  declarations: [AppComponent, ListagemCategoriasComponent],
+  declarations: [AppComponent, ListagemCategoriasComponent, NovaCategoriaComponent, AtualizarCategoriaComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     MaterialModule,
   ],
   providers: [HttpClientModule, TiposService, CategoriasService],
