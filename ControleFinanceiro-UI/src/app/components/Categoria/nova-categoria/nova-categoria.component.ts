@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoriasService } from './../../../services/categorias.service';
 import { TiposService } from './../../../services/tipos.service';
 import { Tipo } from './../../../models/Tipo';
@@ -15,9 +16,10 @@ export class NovaCategoriaComponent implements OnInit {
   tipos: Tipo[];
 
   constructor(
+    private router: Router,
+    private snackBar : MatSnackBar,
     private tiposService: TiposService,
     private categoriaService: CategoriasService,
-    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +44,11 @@ export class NovaCategoriaComponent implements OnInit {
 
     this.categoriaService.NovaCategoria(categoria).subscribe((resultado) => {
       this.router.navigate(['categorias/listagemcategorias']);
+      this.snackBar.open(resultado.mensagem, null, {
+        duration: 2000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+      });
     });
   }
 

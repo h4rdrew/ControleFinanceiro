@@ -14,7 +14,7 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { NovaCategoriaComponent } from './components/Categoria/nova-categoria/nova-categoria.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AtualizarCategoriaComponent } from './components/Categoria/atualizar-categoria/atualizar-categoria.component';
 
 @NgModule({
@@ -31,6 +31,7 @@ import { AtualizarCategoriaComponent } from './components/Categoria/atualizar-ca
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     MaterialModule,
   ],
   providers: [HttpClientModule, TiposService, CategoriasService],

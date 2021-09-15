@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CategoriasService } from './../../../services/categorias.service';
 import { TiposService } from './../../../services/tipos.service';
@@ -22,8 +23,10 @@ export class AtualizarCategoriaComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
     private tiposService: TiposService,
-    private categoriaService: CategoriasService
+    private categoriaService: CategoriasService,
+
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +58,11 @@ export class AtualizarCategoriaComponent implements OnInit {
       .AtualizarCategoria(this.categoriaId, categoria)
       .subscribe((resultado) => {
         this.router.navigate(['categorias/listagemcategorias']);
+        this.snackBar.open(resultado.mensagem, null, {
+          duration: 2000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        });
       });
   }
 
