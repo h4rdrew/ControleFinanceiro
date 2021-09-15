@@ -1,5 +1,6 @@
 ﻿using ControleFinanceiro.BLL.Models;
 using ControleFinanceiro.DAL;
+using ControleFinanceiro.DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -12,25 +13,25 @@ namespace ControleFinanceiro.API.Controllers
     [ApiController]
     public class CategoriasController : ControllerBase
     {
-        private readonly Contexto _context;
+        private readonly ICategoriaRepositorio _categoriaRepositorio;
 
-        public CategoriasController(Contexto context)
+        public CategoriasController(ICategoriaRepositorio categoriaRepositorio)
         {
-            _context = context;
+            _categoriaRepositorio = categoriaRepositorio;
         }
 
         //[Authorize(Roles = "Administrador")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Categoria>>> GetCategorias()
         {
-            return await _context.Categorias.Include(c => c.Tipo).ToListAsync();
+            return await _categoriaRepositorio.PegarTodos().ToListAsync();
         }
         
         //[Authorize(Roles = "Administrador")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Categoria>> GetCategoria(int id)
         {
-            var categoria = await _context.Categorias.FindAsync(id);
+            var categoria = await _categoriaRepositorio.PegarPeloId(id);
 
             if (categoria == null)
             {
@@ -49,55 +50,57 @@ namespace ControleFinanceiro.API.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(categoria).State = EntityState.Modified;
+            if (ModelState.IsValid)
+            {
+                await _categoriaRepositorio.Atualizar(categoria);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch(DbUpdateConcurrencyException)
-            {
-                if (!CategoriaExists(id))
+                return Ok(new
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                    mensagem = $"Categoria {categoria.Nome} atualizado com sucesso"
+                });
             }
 
-            return NoContent();
+            return BadRequest(ModelState);
         }
 
         //[Authorize(Roles = "Administrador")]
         [HttpPost]
         public async Task<ActionResult<Categoria>> PostCategoria(Categoria categoria)
         {
-            _context.Categorias.Add(categoria);
-            await _context.SaveChangesAsync();
+            if (ModelState.IsValid)
+            {
+                await _categoriaRepositorio.Inserir(categoria);
 
-            return CreatedAtAction("GetCategoria", new { id = categoria.CategoriaId }, categoria);
+                return Ok(new
+                {
+                    mensagem = $"Categoria {categoria.Nome} cadastrada com sucesso"
+                });
+            }
+
+            return BadRequest(ModelState);
         }
 
         //[Authorize(Roles = "Administrador")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Categoria>> DeleteCategoria(int id)
         {
-            var categoria = await _context.Categorias.FindAsync(id);
+            var categoria = await _categoriaRepositorio.PegarPeloId(id);
             if (categoria == null)
             {
                 return NotFound();
             }
-            _context.Categorias.Remove(categoria);
-            await _context.SaveChangesAsync();
+            await _categoriaRepositorio.Excluir(id);
 
-            return categoria;
+            return Ok(new
+            {
+                mensagem = $"Categoria {categoria.Nome} excluída com sucesso"
+            });
         }
 
-        private bool CategoriaExists(int id)
+        [HttpGet("FiltrarCategorias/{nomeCategoria}")]
+        public async Task<ActionResult<IEnumerable<Categoria>>> FiltrarCategoria(string nomeCategoria)
         {
-            return _context.Categorias.Any(e => e.CategoriaId == id);
+            return await _categoriaRepositorio.FiltrarCategorias(nomeCategoria).ToListAsync();
         }
     }
 }
