@@ -17,6 +17,7 @@ import { MaterialModule } from './material/material.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MaterialModule,
   ],
   providers: [HttpClientModule, TiposService, CategoriasService],
