@@ -1,18 +1,17 @@
-﻿using ControleFinanceiro.API.ViewModels;
-using ControleFinanceiro.BLL.Models;
-using ControleFinanceiro.DAL;
-using ControleFinanceiro.DAL.Interfaces;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ControleFinanceiro.BLL.Models;
+using ControleFinanceiro.DAL.Interfaces;
+using ControleFinanceiro.API.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ControleFinanceiro.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize(Roles = "Administrador")]
     public class FuncoesController : ControllerBase
     {
         private readonly IFuncaoRepositorio _funcaoRepositorio;
@@ -22,13 +21,12 @@ namespace ControleFinanceiro.API.Controllers
             _funcaoRepositorio = funcaoRepositorio;
         }
 
-        // GET: api/funcoes
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<Funcao>>> GetFuncoes()
         {
             return await _funcaoRepositorio.PegarTodos().ToListAsync();
         }
 
-        // GET: api/Funcoes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Funcao>> GetFuncao(string id)
         {
@@ -41,6 +39,7 @@ namespace ControleFinanceiro.API.Controllers
 
             return funcao;
         }
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFuncao(string id, FuncoesViewModel funcoes)
@@ -55,7 +54,7 @@ namespace ControleFinanceiro.API.Controllers
                 Funcao funcao = new Funcao
                 {
                     Id = funcoes.Id,
-                    Name = funcoes.Nome,
+                    Name = funcoes.Name,
                     Descricao = funcoes.Descricao
                 };
 
@@ -63,7 +62,7 @@ namespace ControleFinanceiro.API.Controllers
 
                 return Ok(new
                 {
-                    mensagem = $"Funcão {funcao.Name} atualizada com sucesso"
+                    mensagem = $"Função {funcao.Name} atualizada com sucesso"
                 });
             }
 
@@ -77,7 +76,7 @@ namespace ControleFinanceiro.API.Controllers
             {
                 Funcao funcao = new Funcao
                 {
-                    Name = funcoes.Nome,
+                    Name = funcoes.Name,
                     Descricao = funcoes.Descricao
                 };
 
@@ -85,7 +84,7 @@ namespace ControleFinanceiro.API.Controllers
 
                 return Ok(new
                 {
-                    mensagem = $"Funcão {funcao.Name} adicionada com sucesso"
+                    mensagem = $"Função {funcao.Name} adicionada com sucesso"
                 });
             }
 
@@ -96,17 +95,23 @@ namespace ControleFinanceiro.API.Controllers
         public async Task<ActionResult<Funcao>> DeleteFuncao(string id)
         {
             var funcao = await _funcaoRepositorio.PegarPeloId(id);
-            if(funcao == null)
+            if (funcao == null)
             {
                 return NotFound();
             }
-            
+
             await _funcaoRepositorio.Excluir(funcao);
 
             return Ok(new
             {
-                mensagem = $"Funcão {funcao.Name} excluída com sucesso"
+                mensagem = $"Função {funcao.Name} excluída com sucesso"
             });
+        }
+
+        [HttpGet("FiltrarFuncoes/{nomeFuncao}")]
+        public async Task<ActionResult<IEnumerable<Funcao>>> FiltrarFuncoes(string nomeFuncao)
+        {
+            return await _funcaoRepositorio.FiltrarFuncoes(nomeFuncao).ToListAsync();
         }
     }
 }

@@ -2,9 +2,7 @@
 using ControleFinanceiro.DAL.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ControleFinanceiro.DAL.Repositorios
@@ -13,7 +11,6 @@ namespace ControleFinanceiro.DAL.Repositorios
     {
         private readonly Contexto _contexto;
         private readonly RoleManager<Funcao> _gerenciadorFuncoes;
-
         public FuncaoRepositorio(Contexto contexto, RoleManager<Funcao> gerenciadorFuncoes) : base(contexto)
         {
             _contexto = contexto;
@@ -43,6 +40,21 @@ namespace ControleFinanceiro.DAL.Repositorios
                 f.Descricao = funcao.Descricao;
 
                 await _gerenciadorFuncoes.UpdateAsync(f);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public IQueryable<Funcao> FiltrarFuncoes(string nomeFuncao)
+        {
+            try
+            {
+                var entity = _contexto.Funcoes.Where(f => f.Name.Contains(nomeFuncao));
+                return entity;
             }
             catch (Exception ex)
             {

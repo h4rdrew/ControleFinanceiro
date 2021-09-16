@@ -21,10 +21,10 @@ export class ListagemCategoriasComponent implements OnInit {
   opcoesCategorias: string[] = [];
   nomesCategorias: Observable<string[]>;
 
-  @ViewChild(MatPaginator, { static: true })
+  @ViewChild(MatPaginator, { static: false })
   paginator: MatPaginator;
 
-  @ViewChild(MatSort, { static: true })
+  @ViewChild(MatSort, { static: false })
   sort: MatSort;
 
   constructor(

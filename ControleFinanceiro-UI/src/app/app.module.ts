@@ -17,6 +17,9 @@ import { MaterialModule } from './material/material.module';
 import { NovaCategoriaComponent } from './components/Categoria/nova-categoria/nova-categoria.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AtualizarCategoriaComponent } from './components/Categoria/atualizar-categoria/atualizar-categoria.component';
+import { ListagemFuncoesComponent, DialogExclusaoFuncoesComponent } from './components/Funcao/listagem-funcoes/listagem-funcoes.component';
+import { NovaFuncaoComponent } from './components/Funcao/nova-funcao/nova-funcao.component';
+import { AtualizarFuncaoComponent } from './components/Funcao/atualizar-funcao/atualizar-funcao.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,10 @@ import { AtualizarCategoriaComponent } from './components/Categoria/atualizar-ca
     NovaCategoriaComponent,
     AtualizarCategoriaComponent,
     DialogExclusaoCategoriaComponent,
+    ListagemFuncoesComponent,
+    NovaFuncaoComponent,
+    AtualizarFuncaoComponent,
+    DialogExclusaoFuncoesComponent
   ],
   imports: [
     BrowserModule,
