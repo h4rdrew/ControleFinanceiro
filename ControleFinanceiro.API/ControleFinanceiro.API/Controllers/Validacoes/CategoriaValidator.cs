@@ -18,14 +18,14 @@ namespace ControleFinanceiro.API.Controllers.Validacoes
                 .MaximumLength(50).WithMessage("Use menos caracteres");
 
             RuleFor(c => c.Icone)
-                .NotNull().WithMessage("Preencha o nome")
-                .NotEmpty().WithMessage("Preencha o nome")
+                .NotNull().WithMessage("Preencha o ícone")
+                .NotEmpty().WithMessage("Preencha o ícone")
                 .MinimumLength(1).WithMessage("Use mais caracteres")
                 .MaximumLength(15).WithMessage("Use menos caracteres");
 
             RuleFor(c => c.TipoId)
-                .NotNull().WithMessage("Preencha o nome")
-                .NotEmpty().WithMessage("Preencha o nome");
+                .NotNull().WithMessage("Escolha o tipo de categoria")
+                .NotEmpty().WithMessage("Escolha o tipo de categoria");
         }
     }
 }

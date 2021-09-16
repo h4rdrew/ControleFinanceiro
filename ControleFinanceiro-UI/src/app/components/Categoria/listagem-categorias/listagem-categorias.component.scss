@@ -1,36 +1,50 @@
-.dadosCategorias{
+.dadosCategorias {
   padding: 30px 30px 30px 30px;
 }
 
-.tabela{
+.tabela {
   width: 100%;
   padding-top: 30px;
 }
 
-.divCard{
+.divCard {
   padding: 50px;
   width: 600px;
 }
 
-.mat-form-field.mat-form-field{
+.mat-form-field.mat-form-field {
   width: 500px;
 }
 
-.cabecalho{
+.cabecalho {
   padding-top: 30px;
   padding-bottom: 30px;
 }
 
-.titulo{
+.titulo {
   position: absolute;
   left: 5px;
 }
 
-.divAutoComplete{
+.divAutoComplete {
   padding-top: 30px;
   padding-bottom: 30px;
 }
 
-.autoCompleteInput{
+.autoCompleteInput {
   width: 500px;
+}
+
+.textoErros {
+  font-weight: 900;
+  color: #c0392b;
+}
+
+.divErros {
+  padding: 20px;
+}
+
+.cardErros {
+  padding-top: 30px;
+  padding-bottom: 30px;
 }

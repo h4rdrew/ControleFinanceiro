@@ -1,3 +1,4 @@
+import { FuncoesService } from './services/funcoes.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -34,7 +35,12 @@ import { AtualizarCategoriaComponent } from './components/Categoria/atualizar-ca
     FormsModule,
     MaterialModule,
   ],
-  providers: [HttpClientModule, TiposService, CategoriasService],
+  providers: [
+    HttpClientModule,
+    TiposService,
+    CategoriasService,
+    FuncoesService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
