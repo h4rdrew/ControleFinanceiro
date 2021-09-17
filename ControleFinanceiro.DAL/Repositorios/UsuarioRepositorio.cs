@@ -3,9 +3,6 @@ using ControleFinanceiro.DAL.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ControleFinanceiro.DAL.Repositorios
@@ -71,6 +68,19 @@ namespace ControleFinanceiro.DAL.Repositorios
             try
             {
                 return await _contexto.Usuarios.CountAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public async Task<Usuario> PegarUsuarioPeloEmail(string email)
+        {
+            try
+            {
+                return await _gerenciadorUsuarios.FindByEmailAsync(email);
             }
             catch (Exception ex)
             {

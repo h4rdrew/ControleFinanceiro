@@ -1,13 +1,17 @@
+import { LoginUsuarioComponent } from './components/Usuario/Login/login-usuario/login-usuario.component';
 import { RegistrarUsuarioComponent } from './components/Usuario/Registro/registrar-usuario/registrar-usuario.component';
+
+
+import { NovaFuncaoComponent } from './components/Funcao/nova-funcao/nova-funcao.component';
 import { AtualizarFuncaoComponent } from './components/Funcao/atualizar-funcao/atualizar-funcao.component';
 import { ListagemFuncoesComponent } from './components/Funcao/listagem-funcoes/listagem-funcoes.component';
-import { AtualizarCategoriaComponent } from './components/Categoria/atualizar-categoria/atualizar-categoria.component';
+
 import { NovaCategoriaComponent } from './components/Categoria/nova-categoria/nova-categoria.component';
+import { AtualizarCategoriaComponent } from './components/Categoria/atualizar-categoria/atualizar-categoria.component';
 import { ListagemCategoriasComponent } from './components/Categoria/listagem-categorias/listagem-categorias.component';
-import { NovaFuncaoComponent } from './components/Funcao/nova-funcao/nova-funcao.component';
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 
 const routes: Routes = [
   {
@@ -35,8 +39,12 @@ const routes: Routes = [
     component: AtualizarFuncaoComponent,
   },
   {
-    path: 'usuario/registrarusuario',
+    path: 'usuarios/registrarusuario',
     component: RegistrarUsuarioComponent,
+  },
+  {
+    path: 'usuarios/loginusuario',
+    component: LoginUsuarioComponent,
   },
 ];
 

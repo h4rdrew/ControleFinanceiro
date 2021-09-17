@@ -1,7 +1,7 @@
 ﻿using ControleFinanceiro.API.ViewModels;
 using FluentValidation;
 
-namespace ControleFinanceiro.API.Controllers.Validacoes
+namespace ControleFinanceiro.API.Validacoes
 {
     public class FuncoesViewModelValidator : AbstractValidator<FuncoesViewModel>
     {

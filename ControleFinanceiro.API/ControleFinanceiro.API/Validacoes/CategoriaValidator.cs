@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ControleFinanceiro.API.Controllers.Validacoes
+namespace ControleFinanceiro.API.Validacoes
 {
     public class CategoriaValidator : AbstractValidator<Categoria>
     {

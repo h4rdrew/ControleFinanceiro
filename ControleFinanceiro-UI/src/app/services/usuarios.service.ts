@@ -1,3 +1,4 @@
+import { DadosLogin } from './../models/DadosLogin';
 import { DadosRegistro } from './../models/DadosRegistro';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -22,8 +23,13 @@ export class UsuariosService {
     return this.http.post<any>(apiUrl, formData);
   }
 
-  RegistrarUsuario(dadosRegistro: DadosRegistro): Observable<any>{
+  RegistrarUsuario(dadosRegistro: DadosRegistro): Observable<any> {
     const apiUrl = `${this.url}/RegistrarUsuario`;
-    return this.http.post<DadosRegistro>(apiUrl, dadosRegistro);
+    return this.http.post<DadosRegistro>(apiUrl, dadosRegistro, httpOptions);
+  }
+
+  LogarUsuario(dadosLogin: DadosLogin): Observable<any> {
+    const apiUrl = `${this.url}/LogarUsuario`;
+    return this.http.post<DadosRegistro>(apiUrl, dadosLogin, httpOptions);
   }
 }

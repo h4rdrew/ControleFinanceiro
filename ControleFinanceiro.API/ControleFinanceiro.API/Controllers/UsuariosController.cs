@@ -3,10 +3,7 @@ using ControleFinanceiro.BLL.Models;
 using ControleFinanceiro.DAL.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ControleFinanceiro.API.Controllers
@@ -74,7 +71,10 @@ namespace ControleFinanceiro.API.Controllers
                 {
                     funcaoUsuario = "Usuario";
                 }
-                else funcaoUsuario = "Administrador";
+                else 
+                { 
+                    funcaoUsuario = "Administrador"; 
+                }
 
                 usuarioCriado = await _usuarioRepositorio.CriarUsuario(usuario, model.Senha);
 
@@ -89,10 +89,40 @@ namespace ControleFinanceiro.API.Controllers
                         usuarioId = usuario.Id
                     });
                 }
-                else return BadRequest(model);
+                else
+                {
+                    return BadRequest(model);
+                }
             }
 
             return BadRequest(model);
+        }
+
+        [HttpPost("LogarUsuario")]
+        public async Task<ActionResult> LogarUsuario(LoginViewModel model)
+        {
+            if (model == null) return NotFound("Usuário e / ou senha inválidos");
+
+            Usuario usuario = await _usuarioRepositorio.PegarUsuarioPeloEmail(model.Email);
+
+            if (usuario != null)
+            {
+                var passwordHasher = new PasswordHasher<Usuario>();
+                if (passwordHasher.VerifyHashedPassword(usuario, usuario.PasswordHash, model.Senha) != PasswordVerificationResult.Failed)
+                {
+                    await _usuarioRepositorio.LogarUsuario(usuario, false);
+
+                    return Ok(new
+                    {
+                        emailUsuarioLogado = usuario.Email,
+                        usurioId = usuario.Id
+                    });
+                }
+
+                return NotFound("Usuário e / ou senha inválidos");
+            }
+
+            return NotFound("Usuário e / ou senha inválidos");
         }
     }
 }

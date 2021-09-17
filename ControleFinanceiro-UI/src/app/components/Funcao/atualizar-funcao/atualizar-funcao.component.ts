@@ -33,10 +33,12 @@ export class AtualizarFuncaoComponent implements OnInit {
         id: new FormControl(resultado.id),
         name: new FormControl(resultado.name, [
           Validators.required,
+          Validators.minLength(1),
           Validators.maxLength(50),
         ]),
         descricao: new FormControl(resultado.descricao, [
           Validators.required,
+          Validators.minLength(1),
           Validators.maxLength(50),
         ]),
       });

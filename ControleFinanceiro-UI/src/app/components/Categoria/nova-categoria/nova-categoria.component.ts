@@ -33,10 +33,12 @@ export class NovaCategoriaComponent implements OnInit {
     this.formulario = new FormGroup({
       nome: new FormControl(null, [
         Validators.required,
+        Validators.minLength(1),
         Validators.maxLength(50),
       ]),
       icone: new FormControl(null, [
         Validators.required,
+        Validators.minLength(1),
         Validators.maxLength(15),
       ]),
       tipoId: new FormControl(null, [Validators.required]),

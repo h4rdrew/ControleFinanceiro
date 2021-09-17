@@ -69,6 +69,7 @@ export class RegistrarUsuarioComponent implements OnInit {
   }
 
   EnviarFormulario(): void {
+    this.erros = [];
     const usuario = this.formulario.value;
     const formData: FormData = new FormData();
 
