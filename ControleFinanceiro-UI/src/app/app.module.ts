@@ -20,6 +20,9 @@ import { AtualizarCategoriaComponent } from './components/Categoria/atualizar-ca
 import { ListagemFuncoesComponent, DialogExclusaoFuncoesComponent } from './components/Funcao/listagem-funcoes/listagem-funcoes.component';
 import { NovaFuncaoComponent } from './components/Funcao/nova-funcao/nova-funcao.component';
 import { AtualizarFuncaoComponent } from './components/Funcao/atualizar-funcao/atualizar-funcao.component';
+import { RegistrarUsuarioComponent } from './components/Usuario/Registro/registrar-usuario/registrar-usuario.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { AtualizarFuncaoComponent } from './components/Funcao/atualizar-funcao/a
     ListagemFuncoesComponent,
     NovaFuncaoComponent,
     AtualizarFuncaoComponent,
-    DialogExclusaoFuncoesComponent
+    DialogExclusaoFuncoesComponent,
+    RegistrarUsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +45,8 @@ import { AtualizarFuncaoComponent } from './components/Funcao/atualizar-funcao/a
     ReactiveFormsModule,
     FormsModule,
     MaterialModule,
+    FlexLayoutModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     HttpClientModule,

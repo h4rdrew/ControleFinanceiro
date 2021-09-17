@@ -31,8 +31,14 @@ export class NovaCategoriaComponent implements OnInit {
     });
 
     this.formulario = new FormGroup({
-      nome: new FormControl(null, [Validators.required, Validators.maxLength(50)]),
-      icone: new FormControl(null, [Validators.required, Validators.maxLength(15)]),
+      nome: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(50),
+      ]),
+      icone: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(15),
+      ]),
       tipoId: new FormControl(null, [Validators.required]),
     });
   }
@@ -56,7 +62,9 @@ export class NovaCategoriaComponent implements OnInit {
       (err) => {
         if (err.status === 400) {
           for (const campo in err.error.errors) {
-            this.erros.push(err.error.errors[campo]);
+            if (err.error.errors.hasOwnProperty(campo)) {
+              this.erros.push(err.error.errors[campo]);
+            }
           }
         }
       }

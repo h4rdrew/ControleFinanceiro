@@ -1,3 +1,4 @@
+import { RegistrarUsuarioComponent } from './components/Usuario/Registro/registrar-usuario/registrar-usuario.component';
 import { AtualizarFuncaoComponent } from './components/Funcao/atualizar-funcao/atualizar-funcao.component';
 import { ListagemFuncoesComponent } from './components/Funcao/listagem-funcoes/listagem-funcoes.component';
 import { AtualizarCategoriaComponent } from './components/Categoria/atualizar-categoria/atualizar-categoria.component';
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'funcoes/atualizarfuncao/:id',
     component: AtualizarFuncaoComponent,
+  },
+  {
+    path: 'usuario/registrarusuario',
+    component: RegistrarUsuarioComponent,
   },
 ];
 
