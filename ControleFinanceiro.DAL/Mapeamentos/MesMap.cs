@@ -9,11 +9,16 @@ namespace ControleFinanceiro.DAL.Mapeamentos
         public void Configure(EntityTypeBuilder<Mes> builder)
         {
             builder.HasKey(m => m.MesId);
-            builder.Property(m => m.Nome).IsRequired().HasMaxLength(20);
-            builder.HasIndex(m => m.Nome).IsUnique();
+            builder.Property(m => m.Nome)
+                   .IsRequired()
+                   .HasMaxLength(20);
+            builder.HasIndex(m => m.Nome)
+                   .IsUnique();
 
-            builder.HasMany(m => m.Despesas).WithOne(m => m.Mes);
-            builder.HasMany(m => m.Ganhos).WithOne(m => m.Mes);
+            builder.HasMany(m => m.Despesas)
+                   .WithOne(m => m.Mes);
+            builder.HasMany(m => m.Ganhos)
+                   .WithOne(m => m.Mes);
 
             builder.HasData(
                 new Mes

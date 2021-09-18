@@ -9,8 +9,11 @@ namespace ControleFinanceiro.DAL.Mapeamentos
     {
         public void Configure(EntityTypeBuilder<Funcao> builder)
         {
-            builder.Property(f => f.Id).ValueGeneratedOnAdd();
-            builder.Property(f => f.Descricao).IsRequired().HasMaxLength(50);
+            builder.Property(f => f.Id)
+                   .ValueGeneratedOnAdd();
+            builder.Property(f => f.Descricao)
+                   .IsRequired()
+                   .HasMaxLength(50);
 
             builder.HasData(
                 new Funcao
